@@ -20,7 +20,7 @@ print_r($user);
 if (
     $user
     // && password_verify($password, (string) $user['password'])
-    && (int) $user['role_id'] === 1
+    && (int) $user['role_id'] > 0
     && (int) $user['is_active'] === 1
 ) {
     session_start();
