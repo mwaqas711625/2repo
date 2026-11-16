@@ -1,4 +1,9 @@
-
+                </div>
+          <!--end::Container-->
+        </div>
+        <!--end::App Content-->
+      </main>
+      <!--end::App Main-->
       <!--begin::Footer-->
       <footer class="app-footer">
         <!--begin::Copyright-->
@@ -42,4 +47,6 @@
       integrity="sha256-3jwsIc9jvdlaTPxHelZqSxiVedrrJhV+jssQEAAiTt0="
       crossorigin="anonymous"
     ></script>
-    
+      </body>
+  <!--end::Body-->
+</html>

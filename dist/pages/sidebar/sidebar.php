@@ -15,7 +15,7 @@ include __DIR__ . '/sidebarPages.php';
             />
             <!--end::Brand Image-->
             <!--begin::Brand Text-->
-            <span class="brand-text fw-light">Hospital Management System</span>
+            <span class="brand-text fw-light">HMS</span>
             <!--end::Brand Text-->
           </a>
           <!--end::Brand Link-->

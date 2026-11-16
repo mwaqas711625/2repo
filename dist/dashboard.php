@@ -1,110 +1,17 @@
 <?php
-session_start();
-
-if (
-    !isset($_SESSION['user'])
-    || !is_array($_SESSION['user'])
-    || empty($_SESSION['user']['email'])
-    || !isset($_SESSION['user']['role_id'])
-    || (int) $_SESSION['user']['role_id'] <= 0
-) {
-    header('Location: ../index.php');
-    exit;
-}
-
-require_once __DIR__ . '/database/config.php';
-
-$roleStatement = $pdo->prepare('SELECT role_name FROM roles WHERE role_id = :role_id LIMIT 1');
-$roleStatement->execute(['role_id' => (int) $_SESSION['user']['role_id']]);
-$role = $roleStatement->fetch();
-$roleName = strtolower(trim((string) ($role['role_name'] ?? '')));
-
-if (!in_array($roleName, ['admin', 'doctor', 'staff'], true)) {
-    http_response_code(403);
-    exit('Access denied.');
-}
-$dashboardTitle = ucfirst($roleName) . ' Dashboard';
 require_once __DIR__ . '/pages/header/header.php';
 if($roleName === 'admin'){
     $dashboardTitle = 'Admin Dashboard';
     ?>
 <!-- dashboard content for admin -->
-  <!--begin::Body-->
-  <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
-    <!--begin::App Wrapper-->
-    <div class="app-wrapper">
-      <!--begin::Header-->
-      <nav class="app-header navbar navbar-expand bg-body">
-        <!--begin::Container-->
-        <div class="container-fluid">
-          <!--begin::Start Navbar Links-->
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                data-lte-toggle="sidebar"
-                href="#"
-                role="button"
-                aria-label="Toggle sidebar"
-              >
-                <i class="bi bi-list"></i>
-              </a>
-            </li>
-            <!-- logout -->
-             <li class="nav-item">
-              <a class="nav-link" href="./controller/logout.php" role="button" aria-label="Logout">
-                <button type="button" class="btn btn-danger">Logout</button>
-              </a>
-            </li>
-          </ul>
-          <!--end::Start Navbar Links-->
-              </ul>
-            </li>
-            <!--end::User Menu Dropdown-->
-          </ul>
-          <!--end::End Navbar Links-->
-        </div>
-        <!--end::Container-->
-      </nav>
-      <!--end::Header-->
-    <?php include __DIR__ . '/pages/sidebar/sidebar.php'; ?>
-      <!--begin::App Main-->
-      <main class="app-main">
-        <!--begin::App Content Header-->
-        <div class="app-content-header">
-          <!--begin::Container-->
-          <div class="container-fluid">
-            <!--begin::Row-->
-            <div class="row">
-              <div class="col-sm-6">
-                <h1 class="mb-0 fs-3"><?= htmlspecialchars($dashboardTitle, ENT_QUOTES, 'UTF-8') ?></h1>
-              </div>
-              <div class="col-sm-6">
-                <nav aria-label="breadcrumb">
-                  <ol class="breadcrumb float-sm-end">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-                  </ol>
-                </nav>
-              </div>
-            </div>
-            <!--end::Row-->
-          </div>
-          <!--end::Container-->
-        </div>
-        <!--end::App Content Header-->
-        <!--begin::App Content-->
-        <div class="app-content">
-          <!--begin::Container-->
-          <div class="container-fluid">
-            <!--begin::Row-->
+   
             <div class="row">
               <!--begin::Col-->
               <div class="col-lg-3 col-6">
                 <!--begin::Small Box Widget 1-->
                 <div class="small-box text-bg-primary">
                   <div class="inner">
-                    <h3>150</h3>
+                    <h3>150</h3><
 
                     <p>New Orders</p>
                   </div>
@@ -225,18 +132,6 @@ if($roleName === 'admin'){
               <!--end::Col-->
             </div>
             <!--end::Row-->
-            <!--begin::Row-->
-            <div class="row">
-              
-               <h1>Muhammad waqas</h1>
-            </div>
-            <!-- /.row (main row) -->
-          </div>
-          <!--end::Container-->
-        </div>
-        <!--end::App Content-->
-      </main>
-      <!--end::App Main-->
 <?php 
 
 } 
@@ -245,83 +140,14 @@ else if($roleName === 'doctor'){
     // Additional logic for doctor dashboard
     ?>
 <!-- dashboard content for doctor -->
-  <!--begin::Body-->
-  <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
-    <!--begin::App Wrapper-->
-    <div class="app-wrapper">
-      <!--begin::Header-->
-      <nav class="app-header navbar navbar-expand bg-body">
-        <!--begin::Container-->
-        <div class="container-fluid">
-          <!--begin::Start Navbar Links-->
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                data-lte-toggle="sidebar"
-                href="#"
-                role="button"
-                aria-label="Toggle sidebar"
-              >
-                <i class="bi bi-list"></i>
-              </a>
-            </li>
-            <!-- logout -->
-             <li class="nav-item">
-              <a class="nav-link" href="./controller/logout.php" role="button" aria-label="Logout">
-                <button type="button" class="btn btn-danger">Logout</button>
   
-              </a>
-            </li>
-          </ul>
-          <!--end::Start Navbar Links-->
-              </ul>
-            </li>
-            <!--end::User Menu Dropdown-->
-          </ul>
-          <!--end::End Navbar Links-->
-        </div>
-        <!--end::Container-->
-      </nav>
-      <!--end::Header-->
-      <?php include __DIR__ . '/pages/sidebar/sidebar.php'; ?>
-      <!--begin::App Main-->
-      <main class="app-main">
-        <!--begin::App Content Header-->
-        <div class="app-content-header">
-          <!--begin::Container-->
-          <div class="container-fluid">
-            <!--begin::Row-->
-            <div class="row">
-              <div class="col-sm-6">
-                <h1 class="mb-0 fs-3"><?= htmlspecialchars($dashboardTitle, ENT_QUOTES, 'UTF-8') ?></h1>
-              </div>
-              <div class="col-sm-6">
-                <nav aria-label="breadcrumb">
-                  <ol class="breadcrumb float-sm-end">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-                  </ol>
-                </nav>
-              </div>
-            </div>
-            <!--end::Row-->
-          </div>
-          <!--end::Container-->
-        </div>
-        <!--end::App Content Header-->
-        <!--begin::App Content-->
-        <div class="app-content">
-          <!--begin::Container-->
-          <div class="container-fluid">
-            <!--begin::Row-->
             <div class="row">
               <!--begin::Col-->
               <div class="col-lg-3 col-6">
                 <!--begin::Small Box Widget 1-->
                 <div class="small-box text-bg-primary">
                   <div class="inner">
-                    <h3>150</h3>
+                    <h3>150</h3><
 
                     <p>New Orders</p>
                   </div>
@@ -442,18 +268,7 @@ else if($roleName === 'doctor'){
               <!--end::Col-->
             </div>
             <!--end::Row-->
-            <!--begin::Row-->
-            <div class="row">
-              
-               
-            </div>
-            <!-- /.row (main row) -->
-          </div>
-          <!--end::Container-->
-        </div>
-        <!--end::App Content-->
-      </main>
-      <!--end::App Main-->
+
 <?php
     
 } 
@@ -462,45 +277,6 @@ else if($roleName === 'staff'){
     // Additional logic for staff dashboard
         ?>
 <!-- dashboard content for staff -->
-  <!--begin::Body-->
-  <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
-    <!--begin::App Wrapper-->
-    <div class="app-wrapper">
-      <!--begin::Header-->
-      <nav class="app-header navbar navbar-expand bg-body">
-        <!--begin::Container-->
-        <div class="container-fluid">
-          <!--begin::Start Navbar Links-->
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                data-lte-toggle="sidebar"
-                href="#"
-                role="button"
-                aria-label="Toggle sidebar"
-              >
-                <i class="bi bi-list"></i>
-              </a>
-            </li>
-            <!-- logout -->
-             <li class="nav-item">
-              <a class="nav-link" href="./controller/logout.php" role="button" aria-label="Logout">
-                <button type="button" class="btn btn-danger">Logout</button>
-              </a>
-            </li>
-          </ul>
-          <!--end::Start Navbar Links-->
-              </ul>
-            </li>
-            <!--end::User Menu Dropdown-->
-          </ul>
-          <!--end::End Navbar Links-->
-        </div>
-        <!--end::Container-->
-      </nav>
-      <!--end::Header-->
-      <?php include __DIR__ . '/pages/sidebar/sidebar.php'; ?>
       <!--begin::App Main-->
       <main class="app-main">
         <!--begin::App Content Header-->
@@ -678,95 +454,6 @@ elseif($roleName === 'patient'){
     // Additional logic for patient dashboard
         ?>
 <!-- dashboard content for patient -->
-  <!--begin::Body-->
-  <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
-    <!--begin::App Wrapper-->
-    <div class="app-wrapper">
-      <!--begin::Header-->
-      <nav class="app-header navbar navbar-expand bg-body">
-        <!--begin::Container-->
-        <div class="container-fluid">
-          <!--begin::Start Navbar Links-->
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                data-lte-toggle="sidebar"
-                href="#"
-                role="button"
-                aria-label="Toggle sidebar"
-              >
-                <i class="bi bi-list"></i>
-              </a>
-            </li>
-            <!-- logout -->
-             <li class="nav-item">
-              <a class="nav-link" href="./controller/logout.php" role="button" aria-label="Logout">
-                <button type="button" class="btn btn-danger">Logout</button>
-              </a>
-            </li>
-          </ul>
-          <!--end::Start Navbar Links-->
-              </ul>
-            </li>
-            <!--end::User Menu Dropdown-->
-          </ul>
-          <!--end::End Navbar Links-->
-        </div>
-        <!--end::Container-->
-      </nav>
-      <!--end::Header-->
-      <!--begin::Sidebar-->
-      <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
-        <!--begin::Sidebar Brand-->
-        <div class="sidebar-brand">
-          <!--begin::Brand Link-->
-          <a href="./index.html" class="brand-link">
-            <!--begin::Brand Image-->
-            <img
-              src="./assets/img/AdminLTELogo.png"
-              alt="AdminLTE Logo"
-              class="brand-image opacity-75 shadow"
-            />
-            <!--end::Brand Image-->
-            <!--begin::Brand Text-->
-            <span class="brand-text fw-light">Hospital Management System</span>
-            <!--end::Brand Text-->
-          </a>
-          <!--end::Brand Link-->
-        </div>
-        <!--begin::Sidebar Wrapper-->
-        <div class="sidebar-wrapper">
-          <nav class="mt-2" aria-label="Main navigation">
-            <!--begin::Sidebar Menu-->
-            <ul
-              class="nav sidebar-menu flex-column"
-              data-lte-toggle="treeview"
-              data-accordion="false"
-              id="navigation"
-            >
-              <li class="nav-item menu-open">
-                <a href="#" class="nav-link active">
-                  <i class="nav-icon bi bi-speedometer"></i>
-                  <p>
-                    Dashboard
-                    <i class="nav-arrow bi bi-chevron-right"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="./dashboard.php" class="nav-link active">
-                      <i class="nav-icon bi bi-circle"></i>
-                      <p>Dashboard v1</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              
-        </div>
-        <!--end::Sidebar Wrapper-->
-      </aside>
-      <!--end::Sidebar-->
       <!--begin::App Main-->
       <main class="app-main">
         <!--begin::App Content Header-->
@@ -942,6 +629,3 @@ elseif($roleName === 'patient'){
 
 require_once __DIR__ .'/pages/footer/footer.php'
 ?>
-  </body>
-  <!--end::Body-->
-</html>
