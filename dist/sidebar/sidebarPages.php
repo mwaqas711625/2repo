@@ -25,9 +25,9 @@ $sidebarMenus = [
 	'admin' => [
 		['Dashboard', 'dashboard.php'],
 		['Register DR', 'pages/admin/RegDr.php'],
-		['Appointments', 'appointments.php'],
-		['Doctors', 'doctors.php'],
-		['Staff', 'staff.php'],
+		['Dr List', 'pages/admin/dr_list.php'],
+		['Staff List', 'pages/admin/staff_list.php'],
+		// ['Staff', 'pages/admin/staff.php'],
 		['Billing', 'billing.php'],
 		['Reports', 'reports.php'],
 	],
