@@ -56,7 +56,7 @@ $doctors = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
           <tbody>
             <?php if (count($doctors) > 0): ?>
               <?php foreach ($doctors as $index => $doc): ?>
-                <?php $photoPath = !empty($doc['profile_photo']) ? 'uploads/profiles/' . $doc['profile_photo'] : 'https://placeholder.com'; ?>
+                <?php $photoPath = !empty($doc['profile_photo']) ? './../../uploads/profiles/' . $doc['profile_photo'] : 'https://placeholder.com'; ?>
                 <tr>
                   <td><?= $index + 1; ?></td>
                   <td>

@@ -9,7 +9,7 @@ require_once __DIR__ . '/sidebarPages.php';
           <a href="<?= htmlspecialchars($appBaseUrl, ENT_QUOTES, 'UTF-8') ?>/dashboard.php" class="brand-link">
             <!--begin::Brand Image-->
             <img
-              src="<?= htmlspecialchars($appBaseUrl, ENT_QUOTES, 'UTF-8') ?>/assets/img/AdminLTELogo.png"
+              src="<?= htmlspecialchars($appBaseUrl, ENT_QUOTES, 'UTF-8') ?>/assets/logo.jpg"
               alt="AdminLTE Logo"
               class="brand-image opacity-75 shadow"
             />

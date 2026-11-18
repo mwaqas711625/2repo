@@ -16,11 +16,11 @@ $stmt = $pdo->prepare(
 );
 $stmt->execute(['email' => $email]);
 $user = $stmt->fetch();
-print_r($user);
+// print_r($user);
 if (
     $user
-    // && password_verify($password, (string) $user['password'])
-    && (int) $user['role_id'] > 0
+    // && password_verify($password, (string) $user['password_hash'])
+    && (int) $user['role_id'] >= 0
     && (int) $user['is_active'] === 1
 ) {
     session_start();

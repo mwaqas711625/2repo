@@ -56,7 +56,7 @@ $staffList = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
           <tbody>
             <?php if (count($staffList) > 0): ?>
               <?php foreach ($staffList as $index => $staff): ?>
-                <?php $photoPath = !empty($staff['profile_photo']) ? 'uploads/profiles/' . $staff['profile_photo'] : 'https://placeholder.com'; ?>
+                <?php $photoPath = !empty($staff['profile_photo']) ? './../../uploads/profiles/' . $staff['profile_photo'] : 'https://placeholder.com'; ?>
                 <tr>
                   <td><?= $index + 1; ?></td>
                   <td>
