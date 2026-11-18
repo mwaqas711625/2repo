@@ -1,15 +1,15 @@
 <?php 
-include __DIR__ . '/sidebarPages.php';
+require_once __DIR__ . '/sidebarPages.php';
 ?>
   <!--begin::Sidebar-->
       <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
         <!--begin::Sidebar Brand-->
         <div class="sidebar-brand">
           <!--begin::Brand Link-->
-          <a href="./index.html" class="brand-link">
+          <a href="<?= htmlspecialchars($appBaseUrl, ENT_QUOTES, 'UTF-8') ?>/dashboard.php" class="brand-link">
             <!--begin::Brand Image-->
             <img
-              src="./assets/img/AdminLTELogo.png"
+              src="<?= htmlspecialchars($appBaseUrl, ENT_QUOTES, 'UTF-8') ?>/assets/img/AdminLTELogo.png"
               alt="AdminLTE Logo"
               class="brand-image opacity-75 shadow"
             />
@@ -42,7 +42,7 @@ include __DIR__ . '/sidebarPages.php';
                 <ul class="nav nav-treeview">
                   <?php foreach ($sidebarMenus[$roleName] as [$label, $href]): ?>
                 <li class="nav-item">
-                    <a href="<?= htmlspecialchars($href, ENT_QUOTES, 'UTF-8') ?>" class="nav-link active">
+                    <a href="<?= htmlspecialchars($appBaseUrl . '/' . ltrim($href, '/'), ENT_QUOTES, 'UTF-8') ?>" class="nav-link active">
                       <i class="nav-icon bi bi-circle"></i>
                       <p><?= htmlspecialchars($label, ENT_QUOTES, 'UTF-8') ?></p>
                     </a>

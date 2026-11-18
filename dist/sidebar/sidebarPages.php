@@ -10,11 +10,11 @@ if (
 	|| !isset($_SESSION['user']['role_id'])
 	|| (int) $_SESSION['user']['role_id'] <= 0
 ) {
-	header('Location: ../index.php');
+	header('Location: ' . '../index.php');
 	exit;
 }
 
-require_once __DIR__ . '../../../database/config.php';
+require_once __DIR__ . '/../database/config.php';
 
 $roleStatement = $pdo->prepare('SELECT role_name FROM roles WHERE role_id = :role_id LIMIT 1');
 $roleStatement->execute(['role_id' => (int) $_SESSION['user']['role_id']]);
@@ -24,7 +24,7 @@ $roleName = strtolower(trim((string) ($role['role_name'] ?? '')));
 $sidebarMenus = [
 	'admin' => [
 		['Dashboard', 'dashboard.php'],
-		['Patients', 'patients.php'],
+		['Register DR', 'pages/admin/RegDr.php'],
 		['Appointments', 'appointments.php'],
 		['Doctors', 'doctors.php'],
 		['Staff', 'staff.php'],

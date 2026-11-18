@@ -34,7 +34,7 @@
       crossorigin="anonymous"
     ></script>
     <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
-    <script src="./js/adminlte.js"></script>
+    <script src="<?= htmlspecialchars($appBaseUrl, ENT_QUOTES, 'UTF-8') ?>/js/adminlte.js"></script>
     <!--end::Required Plugin(AdminLTE)-->
     
     <script

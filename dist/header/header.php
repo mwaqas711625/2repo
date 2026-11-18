@@ -1,6 +1,25 @@
 <?php
 session_start();
 
+$appRoot = realpath(__DIR__ . '/..');
+$documentRoot = realpath($_SERVER['DOCUMENT_ROOT'] ?? '');
+if ($appRoot === false || $documentRoot === false) {
+    throw new RuntimeException('Unable to determine the application URL base.');
+}
+
+$appRootPath = str_replace('\\', '/', $appRoot);
+$documentRootPath = rtrim(str_replace('\\', '/', $documentRoot), '/');
+if ($appRootPath === $documentRootPath) {
+    $appBaseUrl = '';
+} elseif (stripos($appRootPath, $documentRootPath . '/') === 0) {
+    $appBaseUrl = substr($appRootPath, strlen($documentRootPath));
+} else {
+    throw new RuntimeException('The application directory is outside the document root.');
+}
+
+$siteBaseUrl = $appBaseUrl === '' ? '' : rtrim(dirname($appBaseUrl), '/');
+$loginUrl = $siteBaseUrl . '/index.php';
+
 if (
     !isset($_SESSION['user'])
     || !is_array($_SESSION['user'])
@@ -8,11 +27,11 @@ if (
     || !isset($_SESSION['user']['role_id'])
     || (int) $_SESSION['user']['role_id'] <= 0
 ) {
-    header('Location: ../index.php');
+    header('Location: ' . $loginUrl);
     exit;
 }
 
-require_once __DIR__ . '../../../database/config.php';
+require_once __DIR__ . '/../database/config.php';
 
 $roleStatement = $pdo->prepare('SELECT role_name FROM roles WHERE role_id = :role_id LIMIT 1');
 $roleStatement->execute(['role_id' => (int) $_SESSION['user']['role_id']]);
@@ -32,16 +51,7 @@ $dashboardTitle = ucfirst($roleName) . ' Dashboard';
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title><?= htmlspecialchars($dashboardTitle, ENT_QUOTES, 'UTF-8') ?> | HMS</title>
-    <!--begin::Accessibility Meta Tags-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-    <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" content="#007bff" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)" />
-    <!--end::Accessibility Meta Tags-->
-    <!--begin::Accessibility Features-->
-    <!-- Skip links will be dynamically added by accessibility.js -->
-    <meta name="supported-color-schemes" content="light dark" />
-    <link rel="preload" href="./css/adminlte.css" as="style" />
+    <link rel="stylesheet" href="<?= htmlspecialchars($appBaseUrl, ENT_QUOTES, 'UTF-8') ?>/css/adminlte.css" />
     <!--end::Accessibility Features-->
 
     <!--begin::Fonts-->
@@ -72,7 +82,7 @@ $dashboardTitle = ucfirst($roleName) . ' Dashboard';
     <!--end::Third Party Plugin(Bootstrap Icons)-->
 
     <!--begin::Required Plugin(AdminLTE)-->
-    <link rel="stylesheet" href="./css/adminlte.css" />
+    <link rel="stylesheet" href="<?= htmlspecialchars($appBaseUrl, ENT_QUOTES, 'UTF-8') ?>/css/adminlte.css" />
     <!--end::Required Plugin(AdminLTE)-->
 
     <!-- jsvectormap -->
@@ -107,7 +117,7 @@ $dashboardTitle = ucfirst($roleName) . ' Dashboard';
             </li>
             <!-- logout -->
              <li class="nav-item">
-              <a class="nav-link" href="./controller/logout.php" role="button" aria-label="Logout">
+              <a class="nav-link" href="<?= htmlspecialchars($appBaseUrl, ENT_QUOTES, 'UTF-8') ?>/controller/logout.php" role="button" aria-label="Logout">
                 <button type="button" class="btn btn-danger">Logout</button>
   
               </a>
