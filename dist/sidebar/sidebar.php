@@ -41,13 +41,13 @@ require_once __DIR__ . '/sidebarPages.php';
                 </a>
                 <ul class="nav nav-treeview">
                   <?php foreach ($sidebarMenus[$roleName] as [$label, $href]): ?>
-                <li class="nav-item">
-                    <a href="<?= htmlspecialchars($appBaseUrl . '/' . ltrim($href, '/'), ENT_QUOTES, 'UTF-8') ?>" class="nav-link active">
-                      <i class="nav-icon bi bi-circle"></i>
-                      <p><?= htmlspecialchars($label, ENT_QUOTES, 'UTF-8') ?></p>
-                    </a>
-                  </li>
-			        <?php endforeach; ?>
+                    <li class="nav-item">
+                      <a href="<?= htmlspecialchars($appBaseUrl . '/' . ltrim($href, '/'), ENT_QUOTES, 'UTF-8') ?>" class="nav-link active">
+                        <i class="nav-icon bi bi-circle"></i>
+                        <p><?= htmlspecialchars($label, ENT_QUOTES, 'UTF-8') ?></p>
+                      </a>
+                    </li>
+			            <?php endforeach; ?>
 
                 </ul>
               </li>

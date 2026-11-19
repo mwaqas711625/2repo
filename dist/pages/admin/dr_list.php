@@ -26,8 +26,24 @@ function e(?string $value): string
     <?php unset($_SESSION['errors']); ?>
 <?php endif; ?>
 
-<table border="1" cellpadding="8" cellspacing="0" width="100%">
-    <thead>
+<div class="container-fluid py-4">
+  <div class="card shadow-sm border-0">
+    <div class="card-header bg-success text-white py-3 d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">Registered Staff List</h5>
+      <a href="./RegDr.php" class="btn btn-light btn-sm fw-bold">+ Add New Doctor</a>
+    </div>
+
+    <div class="card-body">
+      <?php if (isset($_SESSION['success'])): ?>
+        <div class="alert alert-success alert-dismissible fade show">
+          <?= htmlspecialchars($_SESSION['success']); unset($_SESSION['success']); ?>
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      <?php endif; ?>
+
+      <div class="table-responsive">
+        <table class="table table-hover align-middle table-bordered">
+         <thead>
         <tr>
             <th>#</th>
             <th>Photo</th>
@@ -38,7 +54,7 @@ function e(?string $value): string
             <th>Actions</th>
         </tr>
     </thead>
-    <tbody>
+        <tbody>
         <?php if (empty($records)): ?>
             <tr>
                 <td colspan="7" align="center">Koi record nahi mila.</td>
@@ -84,12 +100,14 @@ function e(?string $value): string
                     </td>
                     <td>
                         <!-- Edit link / form trigger -->
-                        <a href="edit_user.php?id=<?= $userId ?>">Edit</a>
+                        <a href="edit_user.php?id=<?= $userId ?>">
+                            <button type="button" class="btn btn-sm btn-primary">Edit</button>
+                        </a>
 
                         <!-- Delete form calling actions/delete_user.php -->
                         <form action="../../controller/adminBlock/dlt_data.php" method="POST" style="display:inline;" onsubmit="return confirm('Kya aap waqai is record ko delete karna chahte hain?');">
-                            <input type="hidden" name="user_id" value="<?= $userId ?>">
-                            <button type="submit">Delete</button>
+                            <input type="hidden" name="user_id"  value="<?= $userId ?>">
+                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                         </form>
                     </td>
                 </tr>
@@ -97,6 +115,15 @@ function e(?string $value): string
         <?php endif; ?>
     </tbody>
 </table>
+</table>
+      </div>
+    </div>
+  </div>
+</div>
 
+
+<table border="1" cellpadding="8" cellspacing="0" width="100%">
+    
+    
 </body>
 </html>

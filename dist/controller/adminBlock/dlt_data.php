@@ -9,11 +9,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $userId = (int) $_POST['user_id'];
         $result = $admin->delete($userId); // <-- Sirf DELETE query chalegi
         $_SESSION['success'] = $result['message'];
-        header("Location: ../../pages/admin/RegDr.php");
+        header("Location: ../../pages/admin/dr_list.php");
         exit();
     } catch (Throwable $e) {
         $_SESSION['errors'] = [$e->getMessage()];
-        header("Location: ../../pages/admin/RegDr.php");
+        header("Location: ../../pages/admin/dr_list.php");
         exit();
     }
 }

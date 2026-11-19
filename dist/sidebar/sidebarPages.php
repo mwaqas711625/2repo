@@ -28,7 +28,7 @@ $sidebarMenus = [
 		['Dr List', 'pages/admin/dr_list.php'],
 		['Staff List', 'pages/admin/staff_list.php'],
 		['Add Department', 'pages/admin/dept.php'],
-		// ['Department List', 'pages/admin/dept_list.php'],
+		['Department List', 'pages/admin/dept_list.php'],
 		['Billing', 'billing.php'],
 		['Reports', 'reports.php'],
 	],
