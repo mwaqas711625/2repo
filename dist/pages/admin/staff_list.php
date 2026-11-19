@@ -85,11 +85,10 @@ $staffList = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
                   <td><small class="text-muted"><?= htmlspecialchars($staff['created_by_name'] ?? 'Admin'); ?></small></td>
                   <td class="text-center">
                     <a href="edit_user.php?id=<?= (int)$staff['user_id']; ?>" class="btn btn-sm btn-warning">Update</a>
-                    <a href="controller/admin.php?delete_id=<?= (int)$staff['user_id']; ?>&redirect=staff" 
-                       class="btn btn-sm btn-danger"
-                       onclick="return confirm('Kya aap waqai is Staff member ka record delete karna chahte hain?');">
-                      Delete
-                    </a>
+                    <form action="../../controller/adminBlock/dlt_data.php" method="POST" style="display:inline;" onsubmit="return confirm('Kya aap waqai is Staff member ka record delete karna chahte hain?');">
+                      <input type="hidden" name="user_id" value="<?= (int)$staff['user_id']; ?>">
+                      <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
                   </td>
                 </tr>
               <?php endforeach; ?>

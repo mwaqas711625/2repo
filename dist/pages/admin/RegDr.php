@@ -43,7 +43,7 @@ $availableRoles = $rolesQuery->fetchAll(PDO::FETCH_ASSOC);
             </div>
 
             <div class="card-body p-4 p-md-5">
-            <form action="./../../controller/admin.php" method="POST" enctype="multipart/form-data">
+            <form action="./../../controller/adminBlock/insert_data.php" method="POST" enctype="multipart/form-data">
 
                 <!-- Role Selection -->
                 <div class="row mb-4 bg-light p-3 rounded border">

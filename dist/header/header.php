@@ -1,6 +1,7 @@
 <?php
-session_start();
-
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 $appRoot = realpath(__DIR__ . '/..');
 $documentRoot = realpath($_SERVER['DOCUMENT_ROOT'] ?? '');
 if ($appRoot === false || $documentRoot === false) {

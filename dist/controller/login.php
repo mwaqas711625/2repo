@@ -12,7 +12,7 @@ $password = $_POST['password'] ?? '';
 require_once __DIR__ . '/../database/config.php';
 
 $stmt = $pdo->prepare(
-    'SELECT email, password_hash, role_id, is_active FROM users WHERE email = :email LIMIT 1'
+    'SELECT user_id, email, password_hash, role_id, is_active FROM users WHERE email = :email LIMIT 1'
 );
 $stmt->execute(['email' => $email]);
 $user = $stmt->fetch();
@@ -26,6 +26,7 @@ if (
     session_start();
     session_regenerate_id(true);
     $_SESSION['user'] = [
+        'user_id' => (int) $user['user_id'],
         'email' => $user['email'],
         'role_id' => (int) $user['role_id'],
     ];
