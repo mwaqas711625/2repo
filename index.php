@@ -217,7 +217,7 @@ body {
 
         <a href="mailto:support@example.com"
            class="email-link">
-            support@example.com
+            Waqasalam553213@gmail.com
         </a>
     </div>
 
