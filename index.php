@@ -215,7 +215,7 @@ body {
     <div class="email-section">
         <p>Need help? Contact us directly</p>
 
-        <a href="mailto:support@example.com"
+        <a href="mailto:Waqasalam553213@gmail.com"
            class="email-link">
             Waqasalam553213@gmail.com
         </a>
